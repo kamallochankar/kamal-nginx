@@ -1,3 +1,14 @@
-FROM nginx
-COPY ./nginx-config/nginx.conf /etc/nginx/nginx.conf
+# Use an official NGINX base image
+FROM nginx:latest
 
+# Copy custom NGINX configuration file
+COPY nginx.conf /etc/nginx/nginx.conf
+
+# Copy static files to be served by NGINX
+COPY static-html-directory /usr/share/nginx/html
+
+# Expose port 80 (default HTTP port)
+EXPOSE 80
+
+# Define the command to start NGINX
+CMD ["nginx", "-g", "daemon off;"]
